@@ -1,0 +1,46 @@
+{% extends 'admin/adindex.html' %}
+{% block styles %}
+{{ super() }}
+    <style>
+    .btn-lg{
+        margin-left: 500px;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="{{ url_for('admin.adindex') }}">用户信息管理</a></li>
+        <li role="presentation"><a>车辆管理</a></li>
+        <li role="presentation"><a href="#">订单管理</a></li>
+    </ul>
+    <h3>当前车辆数目为：{{ cars | length }} 辆</h3>
+    <p>搜索：<input type="text" name="search" placeholder="请输入搜索词语"><input type="button" value="搜索" id="search"></p>
+    <p><a class="btn btn-primary btn-lg" href="{{ url_for('admin.addcar') }}" role="button">添加在售车辆</a></p>
+    {% for car in cars %}
+  <div class="my">
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="{{ url_for(car.photo_url, filename=car.photo) }}" alt="{{ car.series }}">
+      <div class="caption">
+        <h3>价格：{{ car.price }}</h3>
+        <p>{{ car.content }}</p>
+        <p><button  class="btn btn-primary" type="submit">下架车辆</button> &nbsp;<a href="#" class="btn btn-primary">更改信息</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% endfor %}
+
+{% endblock %}
+{% block scripts %}
+{{super()}}
+    <script src="/static/js/jquery.min.js"></script>
+    <script>
+        $('#search').click(function (){
+           let content = $("input[name='search']").val()
+            location.href='{{ url_for('admin.search') }}?search='+content
+        })
+    </script>
+
+{% endblock %}

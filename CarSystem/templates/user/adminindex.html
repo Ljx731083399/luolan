@@ -1,0 +1,47 @@
+{% extends 'bases.html' %}
+{% block title %}
+管理员首页
+{% endblock %}
+{% block scripts %}
+    <script src="/static/js/jquery.min.js"></script>
+    <script>
+        $('#search').click(function (){
+           let content = $("input[name = 'search']").val()
+            location.href='{{ url_for('user.search') }}?search='+content
+        })
+    </script>
+{% endblock %}
+{% block newcontent %}
+    <h1>用户信息</h1>
+    <span>当前用户数为：{{ users |length }} 人</span>
+    <p>搜索：<input type="text" name="search" placeholder="请输入搜索词语"><input type="button" value="搜索" id="search"></p>
+    {% if users %}
+        <table border="1px", cellspacing="0", width="80%">
+        <tr>
+            <th>序号</th>
+            <th>用户名</th>
+            <th>用户密码</th>
+            <th>邮箱</th>
+            <th>手机号码</th>
+            <th>注册时间</th>
+            <th>操作</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.password }}</td>
+            <td>{{ user.email}}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.registertime }}</td>
+            <td><a href="" >修改</a>&nbsp;<a href="{{ url_for('user.delete') }}?user_id={{ user.id }}" >删除</a></td>
+        </tr>
+    {% endfor %}
+    </table>
+    <a href="{{ url_for('user.register') }}">注册</a>
+    <a href="{{ url_for('user.adminindex') }}">返回全部用户</a>
+    {% else %}
+        <h2 style="color: red">输入内容不连续或用户不存在！</h2>
+        <a href="{{ url_for('user.adminindex') }}">返回全部用户</a>
+    {% endif %}
+{% endblock %}

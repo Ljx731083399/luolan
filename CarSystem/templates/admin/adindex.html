@@ -1,0 +1,61 @@
+{%  extends 'bootstrap/base.html' %}
+{% block title %}首页{% endblock %}
+{% block styles %}
+    {{super()}}
+    <style>
+        .nav-tabs{
+            margin-top: 20px;
+        }
+        .btn-default{
+            margin-left: 500px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a>用户信息管理</a></li>
+        <li role="presentation"><a href="{{ url_for('admin.admincar') }}">车辆管理</a></li>
+        <li role="presentation"><a href="#">订单管理</a></li>
+    </ul>
+    <h3>当前用户人数为：{{ users | length }} 人</h3>
+    <p>搜索：<input type="text" name="search" placeholder="请输入搜索词语"><input type="button" value="搜索" id="search"></p>
+    <table class="table table-bordered">
+            <tr>
+                <td>序号</td>
+                <td>用户名</td>
+                <td>用户密码</td>
+                <td>邮箱</td>
+                <td>手机号码</td>
+                <td>是否管理权(1为管理)</td>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.phone }}</td>
+                <td>{{ user.is_admin }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    <p style="color: red">{{ msg }}</p>
+    <a href="{{ url_for('admin.adindex') }}" class="btn btn-default btn-lg active" role="button">返回全部用户</a>
+{% endblock %}
+{% block scripts %}
+{{super()}}
+    <script src="/static/js/jquery.min.js"></script>
+    <script>
+        $('#search').click(function (){
+           let content = $("input[name='search']").val()
+            location.href='{{ url_for('admin.search') }}?search='+content
+        })
+    </script>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+{% block html_attribs %} lang="zh"{% endblock %}

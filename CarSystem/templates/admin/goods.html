@@ -1,0 +1,24 @@
+{% extends 'bases.html' %}
+{% block styles %}
+{{ super() }}
+    <style>
+
+    </style>
+{% endblock %}
+{% block content %}
+    {% for car in cars %}
+  <div class="my">
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <img src="{{ url_for(car.photo_url, filename=car.photo) }}" alt="{{ car.series }}">
+      <div class="caption">
+        <h3>价格：{{ car.price }}</h3>
+        <p>{{ car.content }}</p>
+        <p><button  class="btn btn-primary" type="submit">加入购物车</button> &nbsp;<a href="#" class="btn btn-primary">购买</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,85 @@
+{%  extends 'bootstrap/base.html' %}
+{% block title %}添加在售车辆{% endblock %}
+{% block styles %}
+    {{super()}}
+    <style>
+        .nav-tabs{
+            margin-top: 20px;
+        }
+        #container h2{
+        padding-left: 240px;
+    }
+    </style>
+{% endblock %}
+{% block content %}
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a>用户信息管理</a></li>
+        <li role="presentation"><a href="{{ url_for('admin.admincar') }}">车辆管理</a></li>
+        <li role="presentation"><a href="#">订单管理</a></li>
+    </ul>
+    <div id="container">
+    <h2>添加在售车辆</h2>
+    <form class="form-horizontal" method="post" action="{{ url_for('admin.addcar') }}" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="inputbrand" class="col-md-2 control-label">品牌：</label>
+    <div class="col-md-3">
+      <input type="text" class="form-control" id="inputUbrand" placeholder="brand" name="brand">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputUseries" class="col-md-2 control-label">车型：</label>
+    <div class="col-md-3">
+      <input type="text" class="form-control" id="inputUseries" placeholder="series" name="series">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputUcolor" class="col-md-2 control-label">颜色：</label>
+    <div class="col-md-3">
+      <input type="text" class="form-control" id="inputUcolor" placeholder="颜色需与图片对应" name="color">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputUprice" class="col-md-2 control-label">价格：</label>
+    <div class="col-md-3">
+      <input type="text" class="form-control" id="inputUprice" placeholder="price" name="price">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputphone" class="col-md-2 control-label">售后服务：</label>
+    <div class="col-md-3">
+      <input type="text" class="form-control" id="inputphone" placeholder="phone" name="phone">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputphoto" class="col-md-2 control-label">图片：</label>
+    <div class="col-md-3">
+      <input type="file" class="form-control" id="inputphoto" name="photo">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputcontent" class="col-md-2 control-label">描述：</label>
+    <div class="col-md-3">
+      <input type="text" class="form-control" id="inputcontent" placeholder="content" name="content">
+    </div>
+  </div>
+        <div class="form-group">
+    <label for="inputPhone" class="col-md-2 control-label"><p style="color: red">{{ register_msg }}</p></label>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-md-6">
+      <button type="submit" class="btn btn-success col-md-3">上架</button>
+    </div>
+
+  </div>
+</form>
+</div>
+
+{% endblock %}
+{% block scripts %}
+{{super()}}
+    <script src="/static/js/jquery.min.js"></script>
+    <script>
+
+    </script>
+
+{% endblock %}
